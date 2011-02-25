@@ -1,3 +1,9 @@
 class User < ActiveRecord::Base
-has_many :microposts
+  attr_accessible :name, :email
+
+  EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates_presence_of :name, :email
+  validates_length_of   :name, :maximum => 50
+  validates_format_of   :email, :with => EmailRegex
 end
